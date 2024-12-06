@@ -90,6 +90,7 @@ const onSubmit = handleSubmit(async () => {
         <PrimaryButton
           :disabled="isSubmitting"
           @click="onSubmit"
+          class="w-full"
         >
           <Loader v-if="isLoader" />
          <span v-else>Зареєструватися</span>

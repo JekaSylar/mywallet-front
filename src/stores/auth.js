@@ -78,6 +78,18 @@ export const useAuth = defineStore('auth', () => {
     }
   }
 
+  const logout = async () => {
+    try {
+       await axios.get('logout');
+      localStorage.removeItem(TOKEN_KEY);
+    }
+    catch (e) {
+      message.setFlashMessage( 'error', e.response.data.message);
+      console.error(e.message)
+    }
+  }
+
+
 
 
   return {
@@ -89,6 +101,7 @@ export const useAuth = defineStore('auth', () => {
     codeResetPassword,
     updatePassword,
     googleCallback,
+    logout
   }
 });
 

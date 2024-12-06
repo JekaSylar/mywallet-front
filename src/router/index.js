@@ -5,6 +5,7 @@ const RegisterView = () => import( '@/views/auth/RegisterView.vue');
 const HomeView = () => import('@/views/HomeView.vue');
 const ForgotPasswordView = import('@/views/auth/ForgotPasswordView.vue');
 const ResetPasswordView = import('@/views/auth/ResetPasswordView.vue')
+const AccountsView = import('@/views/accounts/AccountsView.vue')
 
 
 const router = createRouter({
@@ -14,36 +15,43 @@ const router = createRouter({
     {
       path: "/login",
       name: "login",
-      meta: { layout: "auth", auth: false },
+      meta: { layout: "auth", auth: false, title: 'Вхід' },
       component: LoginView,
     },
 
     {
       path: "/register",
       name: "register",
-      meta: { layout: "auth", auth: false },
+      meta: { layout: "auth", auth: false, title: 'Реєстрація' },
       component: RegisterView,
-    },
-
-    {
-      path: "/",
-      name: "home",
-      meta: { layout: "main", auth: true },
-      component: HomeView,
     },
 
     {
       path: "/reset-password",
       name: "reset-password",
-      meta: { layout: "auth", auth: false },
+      meta: { layout: "auth", auth: false, title: 'Відновлення паролю' },
       component: ForgotPasswordView,
     },
 
     {
       path: "/reset-password/:token",
       name: "enter-code-forgot-password",
-      meta: { layout: "auth", auth: false },
+      meta: { layout: "auth", auth: false, title: 'Відновлення паролю' },
       component: ResetPasswordView,
+    },
+
+    {
+      path: "/",
+      name: "home",
+      meta: { layout: "main", auth: true, title: 'Головна' },
+      component: HomeView,
+    },
+
+    {
+      path: "/accounts",
+      name: "accounts",
+      meta: { layout: "main", auth: true, title: 'Рахунки' },
+      component: AccountsView,
     },
 
   ],
@@ -61,6 +69,11 @@ router.beforeEach((to, from, next) => {
   } else {
     next();
   }
+});
+
+router.beforeEach((to, from, next) => {
+  document.title = to.meta.title + ' - MyWallet';
+  next();
 });
 
 export default router;

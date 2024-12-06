@@ -6,7 +6,6 @@ import {useLoginForm} from '@/composables/auth/login-form.js'
 import InputLabel from "@/components/InputLabel.vue";
 import InputText from '@/components/InputText.vue';
 import PrimaryButton from "@/components/PrimaryButton.vue";
-import GoogleAuth from "@/components/GoogleAuth.vue";
 import AlertMessage from '@/components/AlertMessage.vue'
 import InputError from '@/components/InputError.vue'
 import Loader from '@/components/Loader.vue'
@@ -61,7 +60,7 @@ const onSubmit = handleSubmit(async () => {
       </div>
 
       <div>
-        <PrimaryButton :disabled="isSubmitting"   @click="onSubmit">
+        <PrimaryButton :disabled="isSubmitting"   @click="onSubmit" class="w-full">
           <Loader v-if="isLoader" />
          <span v-else>Увійти</span>
         </PrimaryButton>

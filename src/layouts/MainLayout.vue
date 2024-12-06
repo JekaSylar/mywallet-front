@@ -3,21 +3,22 @@ import { ref } from 'vue'
 import { Dialog, DialogPanel, TransitionChild, TransitionRoot } from '@headlessui/vue'
 import {
   Bars3Icon,
-  CalendarIcon,
-  ChartPieIcon,
   DocumentDuplicateIcon,
   FolderIcon,
   HomeIcon,
   UsersIcon,
   XMarkIcon,
+  CreditCardIcon
 } from '@heroicons/vue/24/outline'
 import DarkMode from '@/components/DarkMode.vue'
+import Exit from '@/components/Exit.vue'
+
 
 const navigation = [
-  { name: 'Головна', href: '#', icon: HomeIcon, current: true },
+  { name: 'Головна', href: {name: 'home'}, icon: HomeIcon  },
+  { name: 'Рахунки', href: {name: 'accounts'}, icon: CreditCardIcon  },
   { name: 'Транзакцій', href: '#', icon: UsersIcon, current: false },
   { name: 'Звіти', href: '#', icon: FolderIcon, current: false },
-  { name: 'Рахунки', href: '#', icon: CalendarIcon, current: false },
   { name: 'Категорії', href: '#', icon: DocumentDuplicateIcon, current: false },
 
 ]
@@ -55,10 +56,17 @@ const sidebarOpen = ref(false)
                     <li>
                       <ul role="list" class="-mx-2 space-y-1">
                         <li v-for="item in navigation" :key="item.name">
-                          <a :href="item.href" :class="[item.current ? 'bg-gray-800 text-white' : 'text-gray-400 hover:bg-gray-800 hover:text-white', 'group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold']">
+                          <router-link :to="item.href"
+                             :class="[
+                                        'group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold',
+                                        $route.name === item.href.name
+                                          ? 'bg-gray-800 text-white'
+                                          : 'text-gray-400 hover:bg-gray-800 hover:text-white',
+                                      ]"
+                          >
                             <component :is="item.icon" class="size-6 shrink-0" aria-hidden="true" />
                             {{ item.name }}
-                          </a>
+                          </router-link>
                         </li>
                       </ul>
                     </li>
@@ -84,10 +92,17 @@ const sidebarOpen = ref(false)
             <li>
               <ul role="list" class="-mx-2 space-y-1">
                 <li v-for="item in navigation" :key="item.name">
-                  <a :href="item.href" :class="[item.current ? 'bg-gray-800 text-white' : 'text-gray-400 hover:bg-gray-800 hover:text-white', 'group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold']">
+                  <router-link :to="item.href"
+                               :class="[
+                                        'group flex gap-x-3 rounded-md p-2 text-sm/6 font-semibold',
+                                        $route.name === item.href.name
+                                          ? 'bg-gray-800 text-white'
+                                          : 'text-gray-400 hover:bg-gray-800 hover:text-white',
+                                      ]"
+                  >
                     <component :is="item.icon" class="size-6 shrink-0" aria-hidden="true" />
                     {{ item.name }}
-                  </a>
+                  </router-link>
                 </li>
               </ul>
             </li>
@@ -99,6 +114,8 @@ const sidebarOpen = ref(false)
                 <span aria-hidden="true">Tom Cook</span>
               </a>
             </li>
+
+
           </ul>
         </nav>
       </div>
@@ -111,6 +128,7 @@ const sidebarOpen = ref(false)
       </button>
       <div class="flex-1 text-sm/6 font-semibold text-white">Головна</div>
      <DarkMode />
+      <Exit />
     </div>
 
     <main class="py-10 lg:pl-72  dark:bg-gray-900">
