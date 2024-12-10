@@ -30,8 +30,7 @@ const  {
   isSubmitting } = useAddAccountForm();
 
 const currencyOptions = getCurrencyOptions();
-
-const currency = ref(currencyOptions[0].currency);
+const currency = ref(currencyOptions[0].value);
 
 const selectedCurrency = value => currency.value = value.value;
 
@@ -41,6 +40,7 @@ const onSubmit = handleSubmit(async () => {
   try {
     await store.addAccounts(name.value, balance.value, currency.value);
     openModal.value = false;
+    name.value = null;
     toast('Рахунок створенно');
    await store.loaderAccounts();
   } catch(error) {

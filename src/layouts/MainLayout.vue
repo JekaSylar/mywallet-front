@@ -19,7 +19,7 @@ const navigation = [
   { name: 'Рахунки', href: {name: 'accounts'}, icon: CreditCardIcon  },
   { name: 'Транзакцій', href: '#', icon: UsersIcon, current: false },
   { name: 'Звіти', href: '#', icon: FolderIcon, current: false },
-  { name: 'Категорії', href: '#', icon: DocumentDuplicateIcon, current: false },
+  { name: 'Категорії', href: {name: 'categories'}, icon: DocumentDuplicateIcon},
 
 ]
 

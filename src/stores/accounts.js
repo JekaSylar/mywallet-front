@@ -20,6 +20,7 @@ export const useAccount = defineStore('accounts', () => {
 
   const  addAccounts = async (name, balance, currency) => {
     try {
+
      await axios.post('accounts', { name, balance, currency });
 
     }
