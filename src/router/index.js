@@ -6,6 +6,7 @@ const HomeView = () => import('@/views/HomeView.vue');
 const ForgotPasswordView = import('@/views/auth/ForgotPasswordView.vue');
 const ResetPasswordView = import('@/views/auth/ResetPasswordView.vue')
 const AccountsView = import('@/views/accounts/AccountsView.vue')
+const CategoriesView = import('@/views/categories/CategoriesView.vue')
 
 
 const router = createRouter({
@@ -53,6 +54,14 @@ const router = createRouter({
       meta: { layout: "main", auth: true, title: 'Рахунки' },
       component: AccountsView,
     },
+    {
+      path: "/categories",
+      name: "categories",
+      meta: { layout: "main", auth: true, title: 'Категорії' },
+      component: CategoriesView,
+    },
+
+
 
   ],
 })

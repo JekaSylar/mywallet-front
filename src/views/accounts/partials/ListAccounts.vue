@@ -1,16 +1,21 @@
 <script setup>
 import  { abbreviation } from '../../../../utils/abbreviation.js';
+import { storeToRefs } from 'pinia';
 import {formatNumber} from '../../../../utils/formatNumber.js'
 import {EyeIcon    } from '@heroicons/vue/24/solid/index.js'
 import DeleteAccount from '@/views/accounts/partials/DeleteAccount.vue'
 import EditAccount from '@/views/accounts/partials/EditAccount.vue'
+import { useAccount } from '@/stores/accounts.js'
+import { onMounted } from 'vue'
 
-defineProps({
-  accounts: {
-    required: true,
-    type: Array
-  }
-});
+const store = useAccount();
+const { accounts } = storeToRefs(store);
+
+onMounted(async () => {
+  await store.loaderAccounts();
+
+})
+
 </script>
 
 <template>
